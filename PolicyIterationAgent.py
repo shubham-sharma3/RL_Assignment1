@@ -20,8 +20,9 @@ class PolicyIterationAgent(Agent):
         number_states = len(states)
         # Policy initialization
         # ******************
-        # TODO 1.1.a)
-        # self.V = ...
+        # 1.1.a)
+
+        self.V = {s: 0 for s in states}
 
         # *******************
 
@@ -36,13 +37,20 @@ class PolicyIterationAgent(Agent):
                 for s in states:
                     a = self.pi[s]
                     # *****************
-                    # TODO 1.1.b)
-                    # if...
-                    #
-                    # else:...
+                    # 1.1.b)
+                    if len(self.mdp.getPossibleActions(s)) == 0:
+                        newV[s] = 0
+                    else:
+                        # TODO need sum over actions here? will pi get probabilistic later?
+                        newValue = 0
+                        for stateAndProb in mdp.getTransitionStatesAndProbs(s, a):
+                            newValue += stateAndProb[1] * (mdp.getReward(s, a, stateAndProb[0]) 
+                                                            + self.discount * self.V[stateAndProb[0]])
+                        newV[s] = newValue
+
 
                 # update value estimate
-                # self.V=...
+                self.V = newV
 
                 # ******************
 
@@ -54,14 +62,25 @@ class PolicyIterationAgent(Agent):
                 else:
                     old_action = self.pi[s]
                     # ************
-                    # TODO 1.1.c)
-                    # self.pi[s] = ...
-
-                    # policy_stable =
+                    # 1.1.c)
+                    maxA = None
+                    maxQ = None
+                    for a in actions:
+                        update = maxQ == None
+                        q = 0
+                        for stateAndProb in mdp.getTransitionStatesAndProbs(s, a):
+                            q += stateAndProb[1] * (mdp.getReward(s, a, stateAndProb[0]) 
+                                                            + self.discount * self.V[stateAndProb[0]])
+                        if(not update):
+                            update = q > maxQ
+                        if(update):
+                            maxQ = q
+                            maxA = a
+                    self.pi[s] = maxA
+                    policy_stable = policy_stable and (old_action == maxA)
 
                     # ****************
             counter += 1
-
             if policy_stable: break
 
         print("Policy converged after %i iterations of policy iteration" % counter)
@@ -71,7 +90,8 @@ class PolicyIterationAgent(Agent):
         Look up the value of the state (after the policy converged).
         """
         # *******
-        # TODO 1.2.
+        # 1.2.
+        return self.V[state]
 
         # ********
 
@@ -84,8 +104,12 @@ class PolicyIterationAgent(Agent):
         to derive it on the fly.
         """
         # *********
-        # TODO 1.3.
-
+        # 1.3.
+        q = 0
+        for stateAndProb in self.mdp.getTransitionStatesAndProbs(state, action):
+            q += stateAndProb[1] * (self.mdp.getReward(state, action, stateAndProb[0]) 
+                                            + self.discount * self.V[stateAndProb[0]])
+        return q
         # **********
 
     def getPolicy(self, state):
@@ -94,7 +118,9 @@ class PolicyIterationAgent(Agent):
         (after the indicated number of value iteration passes).
         """
         # **********
-        # TODO 1.4.
+        # 1.4.
+
+        return self.pi[state]
 
         # **********
 
