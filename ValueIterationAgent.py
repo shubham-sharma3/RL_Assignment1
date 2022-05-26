@@ -18,23 +18,29 @@ class ValueIterationAgent(Agent):
         number_states = len(states)
         # *************
         #  TODO 2.1 a)
-        # self.V = ...
-
+        self.V = {s: 0.0 for s in states}
+        self.pi = {s: self.mdp.getPossibleActions(s)[-1] if self.mdp.getPossibleActions(s) else None for s in states}
         # ************
-
+        counter = 0
         for i in range(iterations):
             newV = {}
+            self.pi = {}
+            pref_a = {}
             for s in states:
                 actions = self.mdp.getPossibleActions(s)
                 # **************
                 # TODO 2.1. b)
-                # if ...
-                #
-                # else: ...
+                if len(actions) < 1:
+                   newV[s] = 0.0
+                else:
+                   q_neu = {}
+                   #newV[s] = 0.0
+                   for a in actions:
+                      q_neu[a] = self.getQValue(s, a)
+                   newV[s] = max(q_neu.values())
 
                 # Update value function with new estimate
-                # self.V =
-
+                self.V[s] = newV[s]        
                 # ***************
 
     def getValue(self, state):
@@ -44,7 +50,7 @@ class ValueIterationAgent(Agent):
         """
         # **********
         # TODO 2.2
-
+        return self.V[state]
         # **********
 
     def getQValue(self, state, action):
@@ -57,7 +63,10 @@ class ValueIterationAgent(Agent):
         """
         # ***********
         # TODO 2.3.
-
+        q_val = 0.0
+        for sp, prob in self.mdp.getTransitionStatesAndProbs(state, action):
+           q_val += prob * (self.mdp.getReward(state, action, None) + self.discount * self.V[sp])
+        return q_val
         # **********
 
     def getPolicy(self, state):
@@ -68,13 +77,16 @@ class ValueIterationAgent(Agent):
 
         actions = self.mdp.getPossibleActions(state)
         if len(actions) < 1:
-            return None
+           return None
 
         else:
-
         # **********
         # TODO 2.4
-
+          Q = {}
+          for a in actions:
+             Q[a] = self.getQValue(state, a)
+          self.pi[state] = max(Q, key=Q.get)
+          return self.pi[state]
         # ***********
 
     def getAction(self, state):

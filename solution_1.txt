@@ -2,6 +2,7 @@ Task 1 - Policy Iteration
 
 Answers:
 
-6) 	Rounds of policy iteration for start state to become non-zero: 3
 
-7) 	Rounds of policy iteration to converge to an optimal policy: 4
+6) 	Rounds of policy iteration (evaluation?) for start state to become non-zero: 16
+
+7) 	Rounds of policy iteration to converge to an optimal policy: 3
