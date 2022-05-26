@@ -18,7 +18,7 @@ class ValueIterationAgent(Agent):
         number_states = len(states)
         # *************
         #  TODO 2.1 a)
-        # self.V = ...
+        self.V = {s: 0 for s in states}
 
         # ************
 
@@ -28,14 +28,34 @@ class ValueIterationAgent(Agent):
                 actions = self.mdp.getPossibleActions(s)
                 # **************
                 # TODO 2.1. b)
-                # if ...
-                #
-                # else: ...
+                maxValue = 0
+                if len(self.mdp.getPossibleActions(s)) == 0:
+                    newV[s] = 0
+                else:
+                    # TODO need sum over actions here? will pi get probabilistic later?
+                    for action in actions:
+                        val = 0
+                        tranisitionStatesAndProbs = self.mdp.getTransitionStatesAndProbs(
+                            s, action)
 
-                # Update value function with new estimate
-                # self.V =
+                        for tranisitionStatesAndProb in tranisitionStatesAndProbs:
+                            discountedValue = self.discount * \
+                                self.V[tranisitionStatesAndProb[0]]
 
-                # ***************
+                            reward = self.mdp.getReward(
+                                s, action, tranisitionStatesAndProb[0])
+
+                            val += reward + \
+                                (discountedValue * tranisitionStatesAndProb[1])
+
+                        maxValue = max(maxValue, val)
+
+                    newV[s] = maxValue
+
+            # update value estimate
+            self.V = newV
+
+            # ***************
 
     def getValue(self, state):
         """
@@ -44,6 +64,7 @@ class ValueIterationAgent(Agent):
         """
         # **********
         # TODO 2.2
+        return self.V[state]
 
         # **********
 
@@ -57,6 +78,11 @@ class ValueIterationAgent(Agent):
         """
         # ***********
         # TODO 2.3.
+        q = 0
+        for stateAndProb in self.mdp.getTransitionStatesAndProbs(state, action):
+            q += stateAndProb[1] * (self.mdp.getReward(state, action, stateAndProb[0])
+                                    + self.discount * self.V[stateAndProb[0]])
+        return q
 
         # **********
 
@@ -72,8 +98,19 @@ class ValueIterationAgent(Agent):
 
         else:
 
-        # **********
-        # TODO 2.4
+            # **********
+            # TODO 2.4
+
+            Q = {}
+
+            for action in actions:
+                q = 0
+                for stateAndProb in self.mdp.getTransitionStatesAndProbs(state, action):
+                    q = stateAndProb[1] * (self.mdp.getReward(state, action, stateAndProb[0])
+                                           + self.discount * self.V[stateAndProb[0]])
+                Q[action] = q
+
+            return max(Q, key=Q.get)
 
         # ***********
 
