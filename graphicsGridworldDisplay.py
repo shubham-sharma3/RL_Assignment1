@@ -307,7 +307,7 @@ def to_grid(point):
 if __name__ == '__main__':
     import gridworld
 
-    grid = gridworld.getCliffGrid3()
+    grid = gridworld.getCliffGrid()
     print(grid.getStates())
 
     setup(grid)
