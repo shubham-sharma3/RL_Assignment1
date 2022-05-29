@@ -41,7 +41,6 @@ class PolicyIterationAgent(Agent):
                     if len(self.mdp.getPossibleActions(s)) == 0:
                         newV[s] = 0
                     else:
-                        # TODO need sum over actions here? will pi get probabilistic later?
                         newValue = 0
                         for stateAndProb in mdp.getTransitionStatesAndProbs(s, a):
                             newValue += stateAndProb[1] * (mdp.getReward(s, a, stateAndProb[0]) 

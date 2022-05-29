@@ -17,25 +17,43 @@ class ValueIterationAgent(Agent):
         states = self.mdp.getStates()
         number_states = len(states)
         # *************
-        #  TODO 2.1 a)
-        # self.V = ...
+        # 2.1 a)
+        self.V = {s: 0 for s in states}
+
 
         # ************
 
         for i in range(iterations):
             newV = {}
+            updateInPlace = False
             for s in states:
                 actions = self.mdp.getPossibleActions(s)
                 # **************
-                # TODO 2.1. b)
-                # if ...
-                #
-                # else: ...
+                # 2.1. b)
+                if len(actions) == 0:
+                    if updateInPlace:
+                        self.V[s] = 0
+                    else:
+                        newV[s] = 0
+                else:
+                    qValues = {}
+                    for a in actions:
+                        q = 0
+                        for stateAndProb in mdp.getTransitionStatesAndProbs(s, a):
+                            q += stateAndProb[1] * (mdp.getReward(s, a, stateAndProb[0]) 
+                                                            + self.discount * self.V[stateAndProb[0]])
+                        qValues[a] = q
+                    maxQ = qValues[max(qValues, key=lambda k: qValues[k])]
+                    if updateInPlace:
+                        self.V[s] = maxQ
+                    else:
+                        newV[s] = maxQ
 
-                # Update value function with new estimate
-                # self.V =
+            # Update value function with new estimate
+            if(not updateInPlace):
+                self.V = newV
 
-                # ***************
+            # ***************
 
     def getValue(self, state):
         """
@@ -43,8 +61,8 @@ class ValueIterationAgent(Agent):
         number of value iteration passes).
         """
         # **********
-        # TODO 2.2
-
+        # 2.2
+        return self.V[state]
         # **********
 
     def getQValue(self, state, action):
@@ -56,8 +74,12 @@ class ValueIterationAgent(Agent):
         to derive it on the fly.
         """
         # ***********
-        # TODO 2.3.
-
+        # 2.3.
+        q = 0
+        for stateAndProb in self.mdp.getTransitionStatesAndProbs(state, action):
+            q += stateAndProb[1] * (self.mdp.getReward(state, action, stateAndProb[0]) 
+                                            + self.discount * self.V[stateAndProb[0]])
+        return q
         # **********
 
     def getPolicy(self, state):
@@ -71,11 +93,13 @@ class ValueIterationAgent(Agent):
             return None
 
         else:
-
-        # **********
-        # TODO 2.4
-
-        # ***********
+            # **********
+            #  2.4
+            # Evaluate Q-Values
+            qValues = {a: self.getQValue(state, a) for a in actions}
+            maxAction = max(qValues, key=lambda k: qValues[k])
+            return maxAction
+            # ***********
 
     def getAction(self, state):
         """
