@@ -50,7 +50,7 @@ class ValueIterationAgent(Agent):
 
                         maxValue = max(maxValue, val)
 
-                    newV[s] = maxValue
+                newV[s] = maxValue
 
             # update value estimate
             self.V = newV
