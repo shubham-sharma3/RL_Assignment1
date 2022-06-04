@@ -3,22 +3,26 @@ Task 2 - Value Iteration
 Answers:
 
 
-6) 	Rounds of value iteration for start state to become non-zero: xxx
-    Why? xxx
+6) 	Rounds of value iteration for start state to become non-zero: 10
+    Why? The agent only gets a non-zero reward for the goal state, therefore only the value function of this state becomes non-zero in the first iteration.
+The information then passes 1 filed per iteration and therefore needs 9 more iterations to reach the start state because there are 9 transitions between the goal and the start state.
 
-7) 	Which parameter to change: xxx
-	Value of the changed parameter: xxx
+7) 	Which parameter to change: noise
+	Value of the changed parameter: 0.016954
 
 8)	Parameter values producing optimal policy types:
-	    a) -n xxx -d xxx
-	    b) -n xxx -d xxx
-	    c) -n xxx -d xxx
-	    d) -n xxx -d xxx
-	    e) -n xxx -d xxx
+	    a) -n 0 -d 0.1
+	    b) -n 0.01 -d 0.1
+	    c) -n 0 -d 0.9
+	    d) -n 0.2 -d 0.9
+	    e) -n 0.9 -d 0.9
 
 9) 	Pros: 								Cons:
+		-									- full policy evaluation for each updated policy
+		-									- slower convergency to a solution
 		-									-
 		-									-
-		-									-
-		-									-
+
+Policy Iteration: 
+Value Iteration:
 
