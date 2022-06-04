@@ -18,7 +18,7 @@ The information then passes 1 filed per iteration and therefore needs 9 more ite
 	    e) -n 0.9 -d 0.9
 
 9) 	Pros: 								Cons:
-		-									- full policy evaluation for each updated policy
+		- always converges to optimal policy			- full policy evaluation for each updated policy
 		-									- slower convergency to a solution
 		-									-
 		-									-
