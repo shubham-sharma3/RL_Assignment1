@@ -39,21 +39,22 @@ class QLearningAgent(Agent):
         """ Look up the current q-value of the state action pair. """
         # *********
         # TODO 3.2.
-
+        
         # *********
 
     def getPolicy(self, state):
         """ Look up the current recommendation for the state. """
         # *********
         # TODO 3.3.
-
+        
+        return self.getAction
         # *********
 
     def getRandomAction(self, state):
         all_actions = self.actionFunction(state)
         if len(all_actions) > 0:
             # *********
-
+            action = np.random.choice(self.actionFunction(state))
             # *********
         else:
             return "exit"
@@ -62,7 +63,14 @@ class QLearningAgent(Agent):
         """ Choose an action: this will require that your agent balance exploration and exploitation as appropriate. """
         # *********
         # TODO 3.4.
-
+        if np.random.uniform(0,1)< self.epsilon:
+            action  = np.getRandomAction(state)
+        else:
+            qValues = {a: self.getQValue(state, a) for a in self.actionFunction(state)}
+            action = max(qValues, key=lambda k: qValues[k])
+        
+            return action
+            
         # *********
 
     def update(self, state, action, nextState, reward):
