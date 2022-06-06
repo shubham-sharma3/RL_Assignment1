@@ -1,0 +1,71 @@
+
+
+ Testing the QLearningAgent on the BookGrid 
+
+ 
+ q-values 
+ at (0, 0) for moving north : 0.568680 
+at (0, 0) for moving west : 0.562069 
+at (0, 0) for moving south : 0.533456 
+at (0, 0) for moving east : 0.586990 
+at (0, 1) for moving north : 0.624889 
+at (0, 1) for moving west : 0.589942 
+at (0, 1) for moving south : 0.608701 
+at (0, 1) for moving east : 0.625841 
+at (0, 2) for moving north : 0.642965 
+at (0, 2) for moving west : 0.603264 
+at (0, 2) for moving south : 0.511360 
+at (0, 2) for moving east : 0.794454 
+at (0, 3) for moving exit : 1.000000 
+at (1, 0) for moving north : 0.577866 
+at (1, 0) for moving west : 0.525262 
+at (1, 0) for moving south : 0.526808 
+at (1, 0) for moving east : 0.541972 
+at (1, 2) for moving north : 0.597182 
+at (1, 2) for moving west : 0.446089 
+at (1, 2) for moving south : 0.085539 
+at (1, 2) for moving east : -0.780206 
+at (1, 3) for moving exit : -0.999023 
+at (2, 0) for moving north : 0.539521 
+at (2, 0) for moving west : 0.475327 
+at (2, 0) for moving south : 0.441306 
+at (2, 0) for moving east : 0.484909 
+at (2, 1) for moving north : 0.384663 
+at (2, 1) for moving west : 0.459221 
+at (2, 1) for moving south : 0.238879 
+at (2, 1) for moving east : 0.441038 
+at (2, 2) for moving north : 0.411886 
+at (2, 2) for moving west : 0.423496 
+at (2, 2) for moving south : 0.409814 
+at (2, 2) for moving east : 0.057316 
+at (2, 3) for moving north : 0.000000 
+at (2, 3) for moving west : 0.250870 
+at (2, 3) for moving south : 0.025993 
+at (2, 3) for moving east : 0.026614 
+values 
+ at (-1, -1) : 0.000000
+ at (0, 0) : 0.586990
+ at (0, 1) : 0.625841
+ at (0, 2) : 0.794454
+ at (0, 3) : 1.000000
+ at (1, 0) : 0.577866
+ at (1, 2) : 0.597182
+ at (1, 3) : -0.999023
+ at (2, 0) : 0.539521
+ at (2, 1) : 0.459221
+ at (2, 2) : 0.423496
+ at (2, 3) : 0.250870
+ 
+ policy 
+ at (-1, -1) move exit 
+at (0, 0) move east 
+at (0, 1) move east 
+at (0, 2) move east 
+at (0, 3) move exit 
+at (1, 0) move north 
+at (1, 2) move north 
+at (1, 3) move exit 
+at (2, 0) move north 
+at (2, 1) move west 
+at (2, 2) move west 
+at (2, 3) move west 

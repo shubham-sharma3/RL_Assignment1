@@ -17,43 +17,27 @@ class ValueIterationAgent(Agent):
         states = self.mdp.getStates()
         number_states = len(states)
         # *************
-        # 2.1 a)
-        self.V = {s: 0 for s in states}
-
-
+        #  TODO 2.1 a)
+        self.V = {s: 0.0 for s in states}
         # ************
 
         for i in range(iterations):
-            newV = {}
-            updateInPlace = False
-            for s in states:
-                actions = self.mdp.getPossibleActions(s)
-                # **************
-                # 2.1. b)
-                if len(actions) == 0:
-                    if updateInPlace:
-                        self.V[s] = 0
-                    else:
-                        newV[s] = 0
-                else:
-                    qValues = {}
-                    for a in actions:
-                        q = 0
-                        for stateAndProb in mdp.getTransitionStatesAndProbs(s, a):
-                            q += stateAndProb[1] * (mdp.getReward(s, a, stateAndProb[0]) 
-                                                            + self.discount * self.V[stateAndProb[0]])
-                        qValues[a] = q
-                    maxQ = qValues[max(qValues, key=lambda k: qValues[k])]
-                    if updateInPlace:
-                        self.V[s] = maxQ
-                    else:
-                        newV[s] = maxQ
+           newV = {}
+           for s in states:
+               actions = self.mdp.getPossibleActions(s)
+               # **************
+               # TODO 2.1. b)
+               if len(actions) < 1:
+                  newV[s] = 0.0
+               else:
+                  q_neu = {}
+                  for a in actions:
+                     q_neu[a] = self.getQValue(s, a)
+                  newV[s] = max(q_neu.values())
 
-            # Update value function with new estimate
-            if(not updateInPlace):
-                self.V = newV
-
-            # ***************
+               # Update value function with new estimate
+           self.V = newV  
+               # ***************
 
     def getValue(self, state):
         """
@@ -61,7 +45,7 @@ class ValueIterationAgent(Agent):
         number of value iteration passes).
         """
         # **********
-        # 2.2
+        # TODO 2.2
         return self.V[state]
         # **********
 
@@ -74,11 +58,10 @@ class ValueIterationAgent(Agent):
         to derive it on the fly.
         """
         # ***********
-        # 2.3.
-        q = 0
-        for stateAndProb in self.mdp.getTransitionStatesAndProbs(state, action):
-            q += stateAndProb[1] * (self.mdp.getReward(state, action, stateAndProb[0]) 
-                                            + self.discount * self.V[stateAndProb[0]])
+        # TODO 2.3.
+        q = 0.0
+        for sp, prob in self.mdp.getTransitionStatesAndProbs(state, action):
+           q += prob * (self.mdp.getReward(state, action, None) + self.discount * self.V[sp])
         return q
         # **********
 
@@ -90,16 +73,16 @@ class ValueIterationAgent(Agent):
 
         actions = self.mdp.getPossibleActions(state)
         if len(actions) < 1:
-            return None
+           return None
 
         else:
-            # **********
-            #  2.4
-            # Evaluate Q-Values
-            qValues = {a: self.getQValue(state, a) for a in actions}
-            maxAction = max(qValues, key=lambda k: qValues[k])
-            return maxAction
-            # ***********
+        # **********
+        # TODO 2.4
+          Q = {}
+          for a in actions:
+             Q[a] = self.getQValue(state, a)
+          return max(Q, key=Q.get)
+        # ***********
 
     def getAction(self, state):
         """

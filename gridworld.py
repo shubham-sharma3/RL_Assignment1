@@ -5,7 +5,6 @@ import environment
 import mdp
 from gridworldClass import Gridworld
 from RandomAgent import RandomAgent
-
 import numpy as np
 
 # THE FOLLOWING AGENTS WILL BE COMPLETED DURING THE TASKS
@@ -58,12 +57,14 @@ def getCliffGrid():
 
 
 def getCliffGrid2():
+    #print('not implemented')  # remove this after implementing the gridworld
     # **********
-    # 1.7
+    # TODO 1.7 (1.8?)
     grid = [[' ', ' ', ' ', ' ', ' '],
-            [8, 'S', ' ', ' ', 10],
+            ['8', 'S', ' ', ' ', 10],
             [-100, -100, -100, -100, -100]]
     return Gridworld(grid)
+    # **********
 
 
 def getDiscountGrid():
