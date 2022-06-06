@@ -5,18 +5,13 @@ import environment
 import mdp
 from gridworldClass import Gridworld
 from RandomAgent import RandomAgent
-<<<<<<< HEAD
 
-=======
-from PolicyIterationAgent import PolicyIterationAgent
-from ValueIterationAgent import ValueIterationAgent
->>>>>>> c2d1ac980ace1dbe4a5e9ccd6e8725ce0c556f98
 import numpy as np
 
 # THE FOLLOWING AGENTS WILL BE COMPLETED DURING THE TASKS
 from PolicyIterationAgent import PolicyIterationAgent  # TASK 1
 from ValueIterationAgent import ValueIterationAgent  # TASK 2
-# from QLearningAgent import QLearningAgent  # TASK 3
+from QLearningAgent import QLearningAgent  # TASK 3
 
 
 # THE GRIDWORLD MAIN CODE AND TEST HARNESS
