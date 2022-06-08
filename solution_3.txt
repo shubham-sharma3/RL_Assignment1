@@ -3,15 +3,16 @@ Task 3 - Q-Learning
 Answers:
 
 
-6) 	Training the Q-learning agent without noise:
+7) 	Training the Q-learning agent without noise:
         a) Value at state (1, 5): 0.0
         b) Optimal policy : no
         c) Name of parameter: epsilon
 
-7) 	Comparison of values for the start state:
-        1) Value of the start state after 300 episodes: 4.48
-        2) Average returns from the start state: -15.28
-Difference because of many failing possibilities?
+8) 	Comparison of values for the start state:
+        1) Value of the start state after 300 episodes: -9.85
+        2) Average returns from the start state: 2.05
+Difference because of many failing possibilities as the proximity to the cliff was very close. Also the epsilon value is quite high such that one in 3 action would be a random action. 
 
-8)  Faster converging algorithm? xxx
+8)  Faster converging algorithm?  =  Value Iteration
+
 

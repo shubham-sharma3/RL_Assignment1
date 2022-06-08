@@ -4,7 +4,7 @@ Answers:
 
 
 6) 	Rounds of value iteration for start state to become non-zero: 10
-    Why? The agent only gets a non-zero reward for the goal state, therefore only the value function of this state becomes non-zero in the first iteration.
+    Why? :The agent only gets a non-zero reward for the goal state, therefore only the value function of this state becomes non-zero in the first iteration.
 The information then passes 1 filed per iteration and therefore needs 9 more iterations to reach the start state because there are 9 transitions between the goal and the start state.
 
 7) 	Which parameter to change: noise
@@ -17,12 +17,14 @@ The information then passes 1 filed per iteration and therefore needs 9 more ite
 	    d) -n 0.2 -d 0.9
 	    e) -n 0.9 -d 0.9
 
-9) 	Pros: 								Cons:
-		- always converges to optimal policy			- full policy evaluation for each updated policy
-		-									- slower convergency to a solution
-		-									-
-		-									-
+9) 	Pros: 
+	1. Few iterations required as policy converges quickly to optimal state
+	2. It is guaranteed to converge
+	3. Computationally cheap to compute and offers good stable policy
 
-Policy Iteration: 
-Value Iteration:
+	Cons:
+	1. Algortihm has more complexity due to policy evaluation and policy improvement steps
+	2. For large MDPs, the number of iterations becomes another hyperparamtere which needs adjustment
+
+		
 
