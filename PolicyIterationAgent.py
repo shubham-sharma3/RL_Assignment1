@@ -45,8 +45,9 @@ class PolicyIterationAgent(Agent):
                           newV[s] += prob * (self.mdp.getReward(s, a, None) + self.discount * self.V[sp])
 
                 # update value estimate
+                
                 self.V = newV
-                print(self.V[(4,0)])
+            print(self.V[self.mdp.getStartState()])
 
                 # ******************
 
@@ -68,6 +69,7 @@ class PolicyIterationAgent(Agent):
 
                     # ****************
             counter += 1
+            # print(self.V[self.mdp.getStartState()])
 
             if policy_stable: break
 

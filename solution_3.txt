@@ -13,6 +13,6 @@ Answers:
         2) Average returns from the start state: 2.05
 Difference because of many failing possibilities as the proximity to the cliff was very close. Also the epsilon value is quite high such that one in 3 action would be a random action. 
 
-8)  Faster converging algorithm?  =  Value Iteration
+9)  Faster converging algorithm?  =  Value Iteration
 
 

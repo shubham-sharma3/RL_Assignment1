@@ -15,7 +15,7 @@ The information then passes 1 filed per iteration and therefore needs 9 more ite
 	    b) -n 0.01 -d 0.1
 	    c) -n 0 -d 0.9
 	    d) -n 0.2 -d 0.9
-	    e) -n 0.9 -d 0.9
+	    e) -n 0.9 -d 0.9 (** should be impossible as action in two states are reaching exit states**)
 
 9) 	Pros: 
 	1. Few iterations required as policy converges quickly to optimal state
