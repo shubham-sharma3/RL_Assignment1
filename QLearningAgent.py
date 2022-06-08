@@ -32,12 +32,21 @@ class QLearningAgent(Agent):
         """ Look up the current value of the state. """
         # *********
         # TODO 3.1.
-        for k in self.Q.keys():
-           if state == k[0]:
-              a = self.getPolicy(state)
-              return self.getQValue(state, a)
+        all_actions = self.actionFunction(state)
+        values = []
 
-        return 0.0
+        if len(all_actions)==0:
+            return 0.0
+        else:
+            for action in all_actions:
+                values.append(self.getQValue(state,action))
+        return max(values)
+        # for k in self.Q.keys():
+        #    if state == k[0]:
+        #       a = self.getPolicy(state)
+        #       return self.getQValue(state, a)
+
+        # return 0.0
         # *********
 
     def getQValue(self, state, action):
@@ -54,14 +63,15 @@ class QLearningAgent(Agent):
         """ Look up the current recommendation for the state. """
         # *********
         # TODO 3.3.
-        a_map = {}
-        for k in self.Q.keys():
-           if state == k[0]:
-              a_map[k[1]] = self.Q[k]
-        if len(a_map) > 0:
-           return max(a_map, key=a_map.get)
+        all_actions = self.actionFunction(state)
+        pi = {}
 
-        return self.getRandomAction(state)
+        if len(all_actions)==0:
+            return None
+        else:
+            for a in all_actions:
+                pi[a] = self.getQValue(state, a)
+        return max(pi, key=pi.get)
         # *********
 
     def getRandomAction(self, state):
@@ -77,7 +87,7 @@ class QLearningAgent(Agent):
         """ Choose an action: this will require that your agent balance exploration and exploitation as appropriate. """
         # *********
         # TODO 3.4.
-        if np.random.rand() < self.epsilon:
+        if np.random.random() < self.epsilon:
            return self.getRandomAction(state)
         else:
            return self.getPolicy(state)
@@ -87,18 +97,13 @@ class QLearningAgent(Agent):
         """ Update parameters in response to the observed transition. """
         # *********
         # TODO 3.5.
-        if state != (-1,-1):
-           if (state, action) not in self.Q.keys():
-              self.Q[(state, action)] = 0.0
-
-           nextA_map = {}
-           for k in self.Q.keys():
-              if nextState == k[0]:
-                 nextA_map[k[1]] = self.Q[k]
-      
-           if len(nextA_map) < 1:
-              Q_max = 0.0
-           else:     
-              Q_max = max(nextA_map.values())
-           self.Q[(state, action)] = self.Q[(state, action)]*(1-self.learningRate) + self.learningRate * (reward + self.discount*(Q_max))
+        # Q_new = {}
+        Q_sa  = self.getQValue(state,action)
+        
+        self.Q[(state, action)] = (1-self.learningRate)*Q_sa + self.learningRate * (reward + self.discount*(self.getValue(nextState)))
+        # Q_new[state] = (1-self.learningRate)*Q_sa + self.learningRate * (reward + self.discount*(self.getValue(nextState)))
+   
+        
+            
+    
         # *********
