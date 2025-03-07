@@ -1,1 +1,1 @@
-Task involved implementing three different agents to navigate a grid maze, and further apply hyperparameter tuning to validate optimal policy learnt. 
+Task involved implementing and evaluating four different agents, PolicyIteration Agent, ValueIteration Agent, QLearning Agent and RandomAgent, to navigate a grid maze, and further apply hyperparameter tuning to validate optimal policy learnt. 
